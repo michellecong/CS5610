@@ -26,6 +26,20 @@ h1 {
   margin: 10px 0;
 }
 
-a:hover {
+h2::first-letter {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+a[href*="github"]:hover {
   color: crimson;
+}
+
+a[href*="github"]::after {
+  content: url(../image/GitHub-Mark-32px.png);
+  margin-left: 20px;
+}
+
+header a:last-child {
+  margin-left: 20px;
 }
