@@ -19,3 +19,13 @@ h1 {
 #job-title {
   font-weight: bold;
 }
+
+.experience,
+.education {
+  border: 2px dashed brown;
+  margin: 10px 0;
+}
+
+a:hover {
+  color: crimson;
+}
