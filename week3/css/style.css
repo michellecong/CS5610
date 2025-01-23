@@ -3,3 +3,19 @@ body {
   font-family: "roboto", sans-serif;
   font-size: 400;
 }
+
+header {
+  text-align: center;
+  border-bottom: 2px dotted darkslateblue;
+  padding-bottom: 5px;
+}
+
+h1 {
+  font-size: 2.2em;
+  color: #1050aa;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#job-title {
+  font-weight: bold;
+}
