@@ -55,3 +55,7 @@ header a:last-child {
   color: darkGreen;
   /* Add your styles here */
 }
+
+a[href$=".edu"]::before {
+  content: url(../image/link.png);
+}
