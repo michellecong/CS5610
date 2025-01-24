@@ -50,3 +50,8 @@ header a:last-child {
 .skills li {
   list-style-type: none;
 }
+
+.experience > ul > li ~ li {
+  color: darkGreen;
+  /* Add your styles here */
+}
