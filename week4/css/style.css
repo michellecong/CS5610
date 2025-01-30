@@ -7,7 +7,6 @@ body {
 .card {
   display: grid;
   grid-template-rows: 200px min-content;
-  background-color: blueviolet;
 }
 
 .card > img {
