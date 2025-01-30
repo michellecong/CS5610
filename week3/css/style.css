@@ -50,3 +50,21 @@ header a:last-child {
 .skills li {
   list-style-type: none;
 }
+
+.experience > ul > li ~ li {
+  color: darkGreen;
+  /* Add your styles here */
+}
+
+a[href$=".edu"]::before {
+  content: url(../image/link.png);
+}
+
+.skills li:last-child {
+  font-size: 1.3rem;
+  background-color: rgba(120, 120, 120, 0.2);
+}
+
+header a:visited {
+  color: rgb(237, 122, 127);
+}
