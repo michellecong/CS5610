@@ -7,6 +7,7 @@ body {
 .card {
   display: grid;
   grid-template-rows: 200px min-content;
+  background-color: blueviolet;
 }
 
 .card > img {
@@ -28,4 +29,13 @@ body {
   border-radius: 0.2em;
   font-size: 80%;
   margin: 5px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows */
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
 }
