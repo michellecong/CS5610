@@ -16,3 +16,15 @@ body {
   max-width: 400px;
   text-align: center;
 }
+
+form label {
+  display: block;
+  margin-bottom: 10px 0 5px;
+  font-weight: bold;
+}
+
+form select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 15px;
+}
