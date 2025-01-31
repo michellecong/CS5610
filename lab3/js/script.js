@@ -19,10 +19,10 @@ const prices = {
 
 function displayOrderSummary(order) {
   console.log(
-    `You ordered a ${order.size} ${
+    `You have ordered a ${order.size} ${
       order.flavor
-    } flavor boba tea with ${order.toppings.join(", ")}. 
-  Your total is $${order.finalPrice.toFixed(2)}.`
+    } boba with these toppings: ${order.toppings.join(" ")}
+Total Price: $${order.finalPrice.toFixed(2)}.`
   );
 }
 
