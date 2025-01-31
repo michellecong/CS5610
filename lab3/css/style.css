@@ -35,6 +35,10 @@ form select {
   border-radius: 5px;
 }
 
+select option:disabled {
+  color: #000;
+}
+
 button {
   background-color: #007bff;
   color: #ffffff;
