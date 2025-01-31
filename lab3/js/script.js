@@ -17,6 +17,15 @@ const prices = {
   },
 };
 
+function displayOrderSummary(order) {
+  console.log(
+    `You ordered a ${order.size} ${
+      order.flavor
+    } flavor boba tea with ${order.toppings.join(", ")}. 
+  Your total is $${order.finalPrice.toFixed(2)}.`
+  );
+}
+
 function placeOrder(flavor, size, toppings) {
   const basePrice = prices.flavor[flavor];
   const sizeMultiplier = prices.size[size];
@@ -25,28 +34,19 @@ function placeOrder(flavor, size, toppings) {
     0
   );
   const finalPrice = sizeMultiplier * (basePrice + toppingsPrice);
-  const order = {
+  let order = {
     flavor: flavor,
     size: size,
     toppings: toppings,
-    price: finalPrice,
+    finalPrice: finalPrice,
   };
-  return order;
-}
 
-function displayOrderSummary(order) {
-  console.log(
-    `You ordered a ${order.size} ${
-      order.flavor
-    } flavor boba tea with ${order.toppings.join(", ")}. 
-  Your total is $${order.price.toFixed(2)}.`
-  );
+  displayOrderSummary(order);
 }
 
 function testOrder() {
   const flavor = "mango";
   const size = "medium";
   const toppings = ["boba", "jelly"];
-  const order = placeOrder(flavor, size, toppings);
-  displayOrderSummary(order);
+  placeOrder(flavor, size, toppings);
 }
