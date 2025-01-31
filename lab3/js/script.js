@@ -33,3 +33,12 @@ function placeOrder(flavor, size, toppings) {
   };
   return order;
 }
+
+function displayOrderSummary(order) {
+  console.log(
+    `You ordered a ${order.size} ${
+      order.flavor
+    } flavor boba tea with ${order.toppings.join(", ")}. 
+  Your total is $${order.price.toFixed(2)}.`
+  );
+}
