@@ -16,3 +16,20 @@ const prices = {
     pudding: 1.0,
   },
 };
+
+function placeOrder(flavor, size, toppings) {
+  const basePrice = prices.flavor[flavor];
+  const sizeMultiplier = prices.size[size];
+  const toppingsPrice = toppings.reduce(
+    (acc, topping) => acc + prices.toppings[topping],
+    0
+  );
+  const finalPrice = sizeMultiplier * (basePrice + toppingsPrice);
+  const order = {
+    flavor: flavor,
+    size: size,
+    toppings: toppings,
+    price: finalPrice,
+  };
+  return order;
+}
