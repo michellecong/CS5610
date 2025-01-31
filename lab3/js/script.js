@@ -42,3 +42,11 @@ function displayOrderSummary(order) {
   Your total is $${order.price.toFixed(2)}.`
   );
 }
+
+function testOrder() {
+  const flavor = "mango";
+  const size = "medium";
+  const toppings = ["boba", "jelly"];
+  const order = placeOrder(flavor, size, toppings);
+  displayOrderSummary(order);
+}
