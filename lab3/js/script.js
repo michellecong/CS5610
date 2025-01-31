@@ -45,7 +45,7 @@ function placeOrder(flavor, size, toppings) {
 }
 
 function testOrder() {
-  const flavor = "mango";
+  const flavor = "original";
   const size = "medium";
   const toppings = ["boba", "jelly"];
   placeOrder(flavor, size, toppings);
