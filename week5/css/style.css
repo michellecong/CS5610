@@ -1,0 +1,20 @@
+.squareList {
+  list-style-type: square;
+}
+
+.buttonContainer {
+  display: flex;
+  background-color: bisque;
+}
+
+.redButton {
+  background-color: red;
+}
+
+.greenButton {
+  background-color: green;
+}
+
+.blueButton {
+  background-color: blue;
+}
