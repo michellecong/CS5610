@@ -76,6 +76,8 @@ function changeButtonTest() {
   } else if (button.innerText === "Clicked") {
     button.innerText = "Click Me!";
   }
+
+  localStorage.setItem("buttonText", button.innerText);
 }
 
 button.addEventListener("click", changeButtonTest);
