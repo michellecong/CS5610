@@ -50,3 +50,14 @@ function testOrder() {
   const toppings = ["boba", "jelly"];
   placeOrder(flavor, size, toppings);
 }
+
+// Function to validate if the required fields are filled out
+function validateOrder() {
+  const flavor = document.getElementById("flavor").value;
+  const size = document.getElementById("size").value;
+  if (!flavor || !size) {
+    alert("Please select a flavor and size.");
+    return false;
+  }
+  return true;
+}
