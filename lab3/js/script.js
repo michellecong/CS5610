@@ -19,10 +19,19 @@ const prices = {
 
 // Function to display the order summary
 function displayOrderSummary(order) {
+  // Display the toppings in a human-readable format
+  const toppingsText =
+    order.toppings.length > 0
+      ? "these toppings: " + order.toppings.join(", ")
+      : "no toppings";
+
+  //Generate the order summary
   const orderSummary = `You have ordered a ${order.size} ${
     order.flavor
-  } boba with these toppings: ${order.toppings.join(" ")}
+  } boba with ${toppingsText}.
 Total Price: $${order.finalPrice.toFixed(2)}.`;
+
+  // Display the order summary
   document.getElementById("flavor-summary").innerText = orderSummary;
 }
 
@@ -30,6 +39,7 @@ Total Price: $${order.finalPrice.toFixed(2)}.`;
 function placeOrder(event) {
   event.preventDefault();
 
+  // Get the selected values from the form
   const flavorSelected = document.getElementById("flavor").value;
   const sizeSelected = document.getElementById("size").value;
 
@@ -39,11 +49,13 @@ function placeOrder(event) {
     .filter((option) => !option.disabled)
     .map((option) => option.value);
 
+  // Validate the order
   if (!validateOrder(flavorSelected, sizeSelected)) {
     alert("Please select a flavor and size.");
     return;
   }
 
+  // Calculate the final price
   const basePrice = prices.flavor[flavorSelected];
   const sizeMultiplier = prices.size[sizeSelected];
   const toppingsPrice = selectedToppings.reduce(
@@ -53,6 +65,7 @@ function placeOrder(event) {
 
   const finalPrice = sizeMultiplier * (basePrice + toppingsPrice);
 
+  // Create the order object
   let order = {
     flavor: flavorSelected,
     size: sizeSelected,
@@ -60,8 +73,18 @@ function placeOrder(event) {
     finalPrice: finalPrice,
   };
 
+  // Display the order summary
   displayOrderSummary(order);
 }
+
+// Function to validate if the required fields are filled out
+function validateOrder(flavorSelected, sizeSelected) {
+  return flavorSelected && sizeSelected;
+}
+
+// Add an event listener to the order button
+const button = document.getElementById("orderButton");
+button.addEventListener("click", placeOrder);
 
 // function testOrder() {
 //   const flavor = "original";
@@ -69,11 +92,3 @@ function placeOrder(event) {
 //   const toppings = ["boba", "jelly"];
 //   placeOrder(flavor, size, toppings);
 // }
-
-// Function to validate if the required fields are filled out
-function validateOrder(flavorSelected, sizeSelected) {
-  return flavorSelected && sizeSelected;
-}
-
-const button = document.getElementById("orderButton");
-button.addEventListener("click", placeOrder);
