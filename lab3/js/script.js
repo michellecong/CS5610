@@ -17,8 +17,9 @@ const prices = {
   },
 };
 
-const flavor = document.getElementById("flavor").value;
-const size = document.getElementById("size").value;
+const flavorSelected = document.getElementById("flavor").value;
+const sizeSelected = document.getElementById("size").value;
+
 const toppings = Array.from(
   document.querySelectorAll('input[name="topping"]:checked')
 ).map((topping) => topping.value);
@@ -37,8 +38,8 @@ function placeOrder() {
     alert("Please select a flavor and size.");
     return;
   } else {
-    const basePrice = prices.flavor[flavor];
-    const sizeMultiplier = prices.size[size];
+    const basePrice = prices.flavor[flavorSelected];
+    const sizeMultiplier = prices.size[sizeSelected];
     const toppingsPrice = toppings.reduce(
       (acc, topping) => acc + prices.toppings[topping],
       0
@@ -47,8 +48,8 @@ function placeOrder() {
     const finalPrice = sizeMultiplier * (basePrice + toppingsPrice);
 
     let order = {
-      flavor: flavor,
-      size: size,
+      flavor: flavorSelected,
+      size: sizeSelected,
       toppings: toppings,
       finalPrice: finalPrice,
     };
@@ -70,6 +71,9 @@ function validateOrder() {
   const size = document.getElementById("size").value;
   if (!flavor || !size) {
     return false;
+  } else {
+    return true;
   }
-  return true;
 }
+
+placeOrder();
