@@ -17,19 +17,6 @@ const prices = {
   },
 };
 
-const flavorSelected = document.getElementById("flavor").value;
-const sizeSelected = document.getElementById("size").value;
-
-const toppingsSelect = document.getElementById("toppings");
-toppingsSelect.options[2].selected = true;
-toppingsSelect.options[1].selected = true;
-
-const selectedToppings = Array.from(toppingsSelect.selectedOptions).map(
-  (option) => option.value
-);
-
-console.log(selectedToppings);
-
 // Function to display the order summary
 function displayOrderSummary(order) {
   console.log(
@@ -41,29 +28,40 @@ Total Price: $${order.finalPrice.toFixed(2)}.`
 }
 
 // Function to place the order
-function placeOrder() {
-  if (!validateOrder()) {
+function placeOrder(event) {
+  event.preventDefault();
+
+  const flavorSelected = document.getElementById("flavor").value;
+  const sizeSelected = document.getElementById("size").value;
+
+  const toppingsSelect = document.getElementById("toppings");
+
+  const selectedToppings = Array.from(toppingsSelect.selectedOptions)
+    .filter((option) => !option.disabled)
+    .map((option) => option.value);
+
+  if (!validateOrder(flavorSelected, sizeSelected)) {
     alert("Please select a flavor and size.");
     return;
-  } else {
-    const basePrice = prices.flavor[flavorSelected];
-    const sizeMultiplier = prices.size[sizeSelected];
-    const toppingsPrice = selectedToppings.reduce(
-      (acc, topping) => acc + prices.toppings[topping],
-      0
-    );
-
-    const finalPrice = sizeMultiplier * (basePrice + toppingsPrice);
-
-    let order = {
-      flavor: flavorSelected,
-      size: sizeSelected,
-      toppings: selectedToppings,
-      finalPrice: finalPrice,
-    };
-
-    displayOrderSummary(order);
   }
+
+  const basePrice = prices.flavor[flavorSelected];
+  const sizeMultiplier = prices.size[sizeSelected];
+  const toppingsPrice = selectedToppings.reduce(
+    (acc, topping) => acc + prices.toppings[topping],
+    0
+  );
+
+  const finalPrice = sizeMultiplier * (basePrice + toppingsPrice);
+
+  let order = {
+    flavor: flavorSelected,
+    size: sizeSelected,
+    toppings: selectedToppings,
+    finalPrice: finalPrice,
+  };
+
+  displayOrderSummary(order);
 }
 
 // function testOrder() {
@@ -74,12 +72,9 @@ function placeOrder() {
 // }
 
 // Function to validate if the required fields are filled out
-function validateOrder() {
-  if (!flavorSelected || !sizeSelected) {
-    return false;
-  } else {
-    return true;
-  }
+function validateOrder(flavorSelected, sizeSelected) {
+  return flavorSelected && sizeSelected;
 }
 
-placeOrder();
+const button = document.getElementById("orderButton");
+button.addEventListener("click", placeOrder);
