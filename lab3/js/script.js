@@ -19,12 +19,11 @@ const prices = {
 
 // Function to display the order summary
 function displayOrderSummary(order) {
-  console.log(
-    `You have ordered a ${order.size} ${
-      order.flavor
-    } boba with these toppings: ${order.toppings.join(" ")}
-Total Price: $${order.finalPrice.toFixed(2)}.`
-  );
+  const orderSummary = `You have ordered a ${order.size} ${
+    order.flavor
+  } boba with these toppings: ${order.toppings.join(" ")}
+Total Price: $${order.finalPrice.toFixed(2)}.`;
+  document.getElementById("flavor-summary").innerText = orderSummary;
 }
 
 // Function to place the order
