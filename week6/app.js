@@ -35,6 +35,10 @@ app.get("/", (req, res) => {
   res.send("Hello, Welcome to My site!");
 });
 
+app.get("/tasks", (req, res) => {
+  res.send("<h1>List of all the tasks </h1>");
+});
+
 const port = 3000;
 
 app.listen(port, () => {
