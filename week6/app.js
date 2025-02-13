@@ -20,6 +20,23 @@ const fs = require("fs");
 //   }
 // });
 
-const logger = require("./logger.js");
-// console.log(logger);
-logger.log();
+// const logger = require("./logger.js");
+// // console.log(logger);
+// logger.log();
+
+const express = require("express");
+// console.log(express);
+const app = express();
+console.log(app);
+
+app.get("/", (req, res) => {
+  // req: request, res: response
+  console.log(req);
+  res.send("Hello, Welcome to My site!");
+});
+
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
