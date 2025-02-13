@@ -37,6 +37,12 @@ app.get("/", (req, res) => {
 
 app.get("/tasks", (req, res) => {
   res.send("<h1>List of all the tasks </h1>");
+  console.log(req.query);
+});
+
+app.get("/tasks/:taskId", (req, res) => {
+  res.send(`<h1>You are viewing task: ${req.params.taskId} </h1>`);
+  // console.log(req.params.taskId);
 });
 
 const port = 3000;
