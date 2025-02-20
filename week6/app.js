@@ -27,23 +27,33 @@ const fs = require("fs");
 const express = require("express");
 // console.log(express);
 const app = express();
-console.log(app);
 
-app.get("/", (req, res) => {
-  // req: request, res: response
-  console.log(req);
-  res.send("Hello, Welcome to my site!");
-});
+app.use(express.static("public"));
 
-app.get("/tasks", (req, res) => {
-  res.send("<h1>List of all the Tasks </h1>");
-  console.log(req.query);
-});
+const taskRouter = require("./routes/tasks.js");
 
-app.get("/tasks/:taskId", (req, res) => {
-  res.send(`<h1>You are viewing Task: ${req.params.taskId} </h1>`);
-  // console.log(req.params.taskId);
-});
+app.use("/tasks", taskRouter);
+
+app.set("view engine", "pug");
+app.set("views", "./views");
+
+// console.log(app);
+
+// app.get("/", (req, res) => {
+//   // req: request, res: response
+//   console.log(req);
+//   res.send("Hello, Welcome to my site!");
+// });
+
+// // app.get("/tasks", (req, res) => {
+//   res.send("<h1>List of all the Tasks </h1>");
+//   console.log(req.query);
+// });
+
+// app.get("/tasks/:taskId", (req, res) => {
+//   res.send(`<h1>You are viewing Task: ${req.params.taskId} </h1>`);
+//   // console.log(req.params.taskId);
+// });
 
 const port = 3000;
 
