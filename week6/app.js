@@ -34,7 +34,8 @@ const taskRouter = require("./routes/tasks.js");
 
 app.use("/tasks", taskRouter);
 
-app.set("view engine", "task");
+app.set("view engine", "pug");
+app.set("views", "./views");
 
 // console.log(app);
 
