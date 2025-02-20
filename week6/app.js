@@ -34,6 +34,8 @@ const taskRouter = require("./routes/tasks.js");
 
 app.use("/tasks", taskRouter);
 
+app.set("view engine", "task");
+
 // console.log(app);
 
 // app.get("/", (req, res) => {

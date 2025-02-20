@@ -6,7 +6,9 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:taskId", (req, res) => {
-  res.send(`<h1>You are viewing Task: ${req.params.taskId} </h1>`);
+  // res.send(`<h1>You are viewing Task: ${req.params.taskId} </h1>`);
+
+  res.render("task", { id: req.params.taskId });
 });
 
 module.exports = router;
