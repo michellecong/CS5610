@@ -22,7 +22,7 @@ router.get("/:taskId", async (req, res) => {
       `https://jsonplaceholder.typicode.com/users/${req.params.taskId}`
     );
 
-    res.json(response.data);
+    res.json(response.data.name);
 
     // res.render("task", {
     //   id: req.params.taskId,
