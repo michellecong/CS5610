@@ -26,18 +26,18 @@ router.get("/:taskId", async (req, res) => {
       `https://jsonplaceholder.typicode.com/users/${req.params.taskId}`
     );
 
-    res.json({
-      id: req.params.taskId,
-      title: response.data.title,
-      completed: response.data.completed,
-      name: response2.data.name,
-    });
-    // res.render("task", {
+    // res.json({
     //   id: req.params.taskId,
     //   title: response.data.title,
     //   completed: response.data.completed,
     //   name: response2.data.name,
     // });
+    res.render("task", {
+      id: req.params.taskId,
+      title: response.data.title,
+      completed: response.data.completed,
+      name: response2.data.name,
+    });
   } catch (error) {
     res.json({ message: error.message });
   }
