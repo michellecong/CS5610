@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+
+head
+  title= "Task Details"
+body
+  h1 You are viewing task #{id} using a template
+  p the title of the task is: #{title}
+  if completed
+    p This task is completed
+  else
+    p This task is not completed
