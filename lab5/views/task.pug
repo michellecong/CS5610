@@ -5,9 +5,7 @@ head
   title= "Task Details"
 body
   h1 You are viewing task #{id} using a template
-  p the title of the task is: #{title}
-  if completed
-    p This task is completed
-  else
-    p This task is not completed
-  p #{name} is responsible for this
+  ul
+    li The title of the task is: #{title}
+    li The task is #{completed ? 'completed' : 'not completed'}
+    li #{name} is responsible for this
