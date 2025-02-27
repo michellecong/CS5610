@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+
+head
+  title= "Task Details"
+  link(rel="stylesheet", href="/style.css")
+body
+  h1 You are viewing task #{id} using a template
+  ul
+    li The title of the task is: #{title}
+    li The task is #{completed ? 'completed' : 'not completed'}
+    li #{name} is responsible for this
