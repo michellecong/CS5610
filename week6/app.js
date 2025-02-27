@@ -27,6 +27,9 @@ const fs = require("fs");
 const express = require("express");
 // console.log(express);
 const app = express();
+const db = require("./db");
+console.log(db.connect());
+// console.log(db.addToDB());
 
 app.use(express.static("public"));
 
