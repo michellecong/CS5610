@@ -40,6 +40,9 @@ app.use("/tasks", taskRouter);
 app.set("view engine", "pug");
 app.set("views", "./views");
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // console.log(app);
 
 // app.get("/", (req, res) => {
