@@ -48,12 +48,18 @@ router.get("/:taskId", async (req, res) => {
 
   // res.render("task", { id: req.params.taskId });
 });
+router.get("/newtask", (req, res) => {
+  newtask;
+
+  res.render("newtask");
+});
 
 router.post("/", async (req, res) => {
   try {
     await db.addToDB(req.body);
 
     res.send("Task added to DB");
+    res.redirect("/tasks");
   } catch (error) {
     res.json({ message: error.message });
   }
