@@ -29,6 +29,14 @@ router.get(
   // res.send("<h1>List of all the Tasks </h1>");
 );
 
+router.get("/newtask", (req, res) => {
+  try {
+    res.render("taskForm");
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
+
 router.get("/:taskId", async (req, res) => {
   // res.send(`<h1>You are viewing Task: ${req.params.taskId} </h1>`);
   try {
@@ -49,18 +57,11 @@ router.get("/:taskId", async (req, res) => {
   // res.render("task", { id: req.params.taskId });
 });
 
-router.get("/newtask", (req, res) => {
-  res.render("taskForm");
-});
-
 router.post("/", async (req, res) => {
   try {
-    console.log("Headers:", req.headers);
-    console.log("Content-Type:", req.headers["content-type"]);
-
     console.log("req.body", req.body);
     await db.addToDB(req.body);
-    // res.redirect("/tasks");
+    res.redirect("/tasks");
   } catch (error) {
     res.json({ message: error.message });
   }
