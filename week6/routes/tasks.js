@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const { addToDB } = require("../db");
+
 const db = require("../db");
 
 router.get(
@@ -48,18 +48,19 @@ router.get("/:taskId", async (req, res) => {
 
   // res.render("task", { id: req.params.taskId });
 });
-router.get("/newtask", (req, res) => {
-  newtask;
 
-  res.render("newtask");
+router.get("/newtask", (req, res) => {
+  res.render("taskForm");
 });
 
 router.post("/", async (req, res) => {
   try {
-    await db.addToDB(req.body);
+    console.log("Headers:", req.headers);
+    console.log("Content-Type:", req.headers["content-type"]);
 
-    res.send("Task added to DB");
-    res.redirect("/tasks");
+    console.log("req.body", req.body);
+    await db.addToDB(req.body);
+    // res.redirect("/tasks");
   } catch (error) {
     res.json({ message: error.message });
   }

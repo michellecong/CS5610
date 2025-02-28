@@ -13,12 +13,12 @@ module.exports = {
     console.log("Connected to MongoDB");
   },
   addToDB: async function (doc) {
-    const result = await client.db().collection(tasks).insertOne(data);
     try {
       const result = await client
         .db("cs5610")
         .collection("tasks")
         .insertOne(doc);
+
       console.log(`Added to DB: ${result.insertedId}`);
     } catch (e) {
       console.error(`Failed to add to DB: ${e}`);
