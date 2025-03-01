@@ -34,35 +34,25 @@ console.log(db.connect());
 app.use(express.static("public"));
 
 const taskRouter = require("./routes/tasks.js");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/tasks", taskRouter);
 
 app.set("view engine", "pug");
 app.set("views", "./views");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 // console.log(app);
 
-// app.get("/", (req, res) => {
-//   // req: request, res: response
-//   console.log(req);
-//   res.send("Hello, Welcome to my site!");
-// });
-
-// // app.get("/tasks", (req, res) => {
-//   res.send("<h1>List of all the Tasks </h1>");
-//   console.log(req.query);
-// });
-
-// app.get("/tasks/:taskId", (req, res) => {
-//   res.send(`<h1>You are viewing Task: ${req.params.taskId} </h1>`);
-//   // console.log(req.params.taskId);
-// });
+app.get("/", (req, res) => {
+  // req: request, res: response
+  console.log(req);
+  res.send("Hello, Welcome to my site!");
+});
 
 const port = 3000;
 
 app.listen(port, () => {
+  db.connect();
   console.log(`Server is running on http://localhost:${port}`);
 });
