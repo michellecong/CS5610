@@ -20,4 +20,13 @@ module.exports = {
       console.error(`Failed to add to DB: ${e}`);
     }
   },
+  find: async function () {
+    try {
+      const cursor = await client.db("cs5610").collection("tasks").find();
+      return cursor;
+    } catch (e) {
+      console.error(`Failed to read from DB: ${e}`);
+      throw e;
+    }
+  },
 };

@@ -4,30 +4,18 @@ const axios = require("axios");
 
 const db = require("../db");
 
-router.get(
-  "/",
-  async (req, res) => {
-    try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos/"
-      );
+router.get("/", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/todos/"
+    );
 
-      console.log(response.data);
-      res.json(response.data);
-    } catch (error) {
-      res.json({ message: error.message });
-    }
+    console.log(response.data);
+    res.json(response.data);
+  } catch (error) {
+    res.json({ message: error.message });
   }
-
-  // const promise = axios.get("https://jsonplaceholder.typicode.com/todos/");
-  // promise.then((response) => {
-  //   // console.log(response.data);
-  //   res.json(response.data);
-  // }).catch((error) => {
-  //   console.log(error.message);
-  // }
-  // res.send("<h1>List of all the Tasks </h1>");
-);
+});
 
 router.get("/newtask", (req, res) => {
   try {
