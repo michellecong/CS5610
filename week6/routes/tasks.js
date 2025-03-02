@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const cursor = await db.find();
     const tasks = await cursor.toArray();
 
-    res.json(tasks);
+    res.render("allTasks", { tasks });
   } catch (error) {
     res.json({ message: error.message });
   }
