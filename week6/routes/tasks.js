@@ -6,12 +6,10 @@ const db = require("../db");
 
 router.get("/", async (req, res) => {
   try {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos/"
-    );
+    const cursor = await db.find();
+    const tasks = await cursor.toArray();
 
-    console.log(response.data);
-    res.json(response.data);
+    res.json(tasks);
   } catch (error) {
     res.json({ message: error.message });
   }
