@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { MongoClient, ObjectId } = require("mongodb");
 const axios = require("axios");
 
 const db = require("../db");
@@ -26,16 +27,12 @@ router.get("/newtask", (req, res) => {
 router.get("/:taskId", async (req, res) => {
   // res.send(`<h1>You are viewing Task: ${req.params.taskId} </h1>`);
   try {
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos/${req.params.taskId}`
-    );
+    const task = await db.findOne({ _id: new ObjectId(req.params.taskId) });
 
-    res.render("task", {
-      id: req.params.taskId,
-      title: response.data.title,
-      completed: response.data.completed,
-    });
-    // res.json(response.data);
+    if (!task) {
+      res.status(404).send("Task not found");
+    }
+    res.json(task);
   } catch (error) {
     res.json({ message: error.message });
   }
