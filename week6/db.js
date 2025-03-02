@@ -29,4 +29,17 @@ module.exports = {
       throw e;
     }
   },
+
+  findOne: async function (query) {
+    try {
+      const document = await client
+        .db("cs5610")
+        .collection("tasks")
+        .findOne(query);
+      return document;
+    } catch (e) {
+      console.error(`Failed to read from DB: ${e}`);
+      throw e;
+    }
+  },
 };
