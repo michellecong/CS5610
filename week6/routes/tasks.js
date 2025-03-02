@@ -32,7 +32,12 @@ router.get("/:taskId", async (req, res) => {
     if (!task) {
       res.status(404).send("Task not found");
     }
-    res.json(task);
+    res.render("task", {
+      id: req.params.taskId,
+      title: task.title,
+      completed: task.completed,
+      date: task.date,
+    });
   } catch (error) {
     res.json({ message: error.message });
   }
