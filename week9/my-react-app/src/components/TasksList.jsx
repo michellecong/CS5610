@@ -39,10 +39,10 @@ export default function TasksList() {
     },
   ]);
   // setTasks([]);
-  // console.log(tasks);
+  console.log(tasks);
   return (
     <>
-      <ul>
+      <ul className="tasks-list">
         {tasks.map((task) => {
           return <Task key={task.id} taskObj={task} />;
         })}

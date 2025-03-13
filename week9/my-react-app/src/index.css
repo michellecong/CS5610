@@ -90,7 +90,15 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+.tasks-list {
+  list-style-type: disc;
+}
+
 .task {
-  list-style-type: none;
-  background-color: lightskyblue;
+  display: flex;
+  background-color: rgb(118, 152, 163);
+
+  justify-content: space-between;
+  padding: 0.5em;
+  margin: 0.5em;
 }
