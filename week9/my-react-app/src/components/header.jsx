@@ -1,10 +1,10 @@
 import React from "react";
-export default function Header(props) {
-  console.log(props);
+export default function Header({ myAppName }) {
+  console.log(myAppName);
   return (
     <div>
       <header>
-        <h1>Welcom to {props.myAppName}</h1>
+        <h1>Welcom to {myAppName}</h1>
       </header>
     </div>
   );
