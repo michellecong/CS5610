@@ -40,7 +40,7 @@ import Header from "./components/header";
 export default function App() {
   const appName = "My Awesome App";
   return (
-    <div>
+    <div className="App-container">
       <Header myAppName={appName} />
     </div>
   );

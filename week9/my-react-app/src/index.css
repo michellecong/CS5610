@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -26,7 +26,7 @@ body {
   margin: 0;
   /* display: flex;
   place-items: center; */
-  min-width: 320px;
+/* min-width: 320px;
   min-height: 100vh;
   padding: 1.5em;
 }
@@ -66,4 +66,16 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+} */
+.App-container {
+  border: darkblue 1px solid;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+.head-container {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
 }
