@@ -50,3 +50,23 @@ export default function TasksList() {
     </>
   );
 }
+
+// function deleteTask(deletedId) {
+//   console.log("delete task", deletedId);
+//   const newArrayOfTasks = tasks.filter((task) => task.id !== deletedId);
+//   setTasks(newArrayOfTasks);
+// }
+
+// console.log(tasks);
+
+// return tasks.length === 0 ? (
+//   <p>No tasks</p>
+// ) : (
+//   <>
+//     <ul className="tasks-list">
+//       {tasks.map((task) => {
+//         return <Task key={task.id} taskObj={task} onDelete={deleteTask} />;
+//       })}
+//     </ul>
+//   </>
+// );
