@@ -4,9 +4,19 @@ import TasksList from "./components/TasksList";
 import AddTask from "./components/AddTask";
 
 export default function App() {
+  async function fetchData() {
+    try {
+      const response = fetch("http://localhost:3001/tasks");
+      const data = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
-    console.log("App component is mounted");
+    fetchData();
   }, []);
+
   const appName = "My Awesome App";
 
   return (
