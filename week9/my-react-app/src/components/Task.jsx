@@ -11,7 +11,7 @@ export default function Task({ taskObj, onDelete }) {
       <div className="task-container">
         <div className="taskTitleIconContainer">
           <p>{taskObj.title}</p>
-          <IoTrashSharp onClick={deletePressed} style={{ cursor: "pointer" }} />
+          <IoTrashSharp onClick={deletePressed} />
         </div>
 
         <p>{taskObj.date}</p>
