@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function fetchData() {
+    setIsLoading(true);
     try {
       const response = await fetch("http://localhost:3001/tasks");
 
@@ -20,6 +22,8 @@ export default function App() {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
