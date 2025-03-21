@@ -94,7 +94,7 @@ button {
   list-style-type: disc;
 }
 
-.task {
+.task-container {
   background-color: rgb(118, 152, 163);
 
   justify-content: space-between;
@@ -102,10 +102,7 @@ button {
   margin: 0.5em;
 }
 
-.task-container {
-  background-color: rgb(118, 152, 163);
-
+.taskTitleIconContainer {
+  display: flex;
   justify-content: space-between;
-  padding: 0.5em;
-  margin: 0.5em;
 }

@@ -4,7 +4,7 @@ export default function AddTask({ onAdd = () => {} }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!title) {
       alert("Please add a task title");
@@ -13,6 +13,7 @@ export default function AddTask({ onAdd = () => {} }) {
 
     // Check if onAdd is a function before calling it
     if (typeof onAdd === "function") {
+      // Let the parent component handle the API call
       onAdd({ title, date });
 
       // Clear form after submission
