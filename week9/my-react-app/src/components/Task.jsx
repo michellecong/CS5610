@@ -1,5 +1,7 @@
 import React from "react";
 import { IoTrashSharp } from "react-icons/io5";
+import { NavLink as Navlink } from "react-router";
+import { NavLink } from "react-router";
 
 export default function Task({ taskObj, onDelete }) {
   function deletePressed() {
@@ -10,7 +12,7 @@ export default function Task({ taskObj, onDelete }) {
     <li>
       <div className="task-container">
         <div className="taskTitleIconContainer">
-          <p>{taskObj.title}</p>
+          <NavLink to={`/tasks/${taskObj.id}`}>{taskObj.title}</NavLink>
           <IoTrashSharp onClick={deletePressed} />
         </div>
 

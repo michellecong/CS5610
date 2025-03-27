@@ -3,14 +3,18 @@ import Header from "./components/Header";
 import TasksList from "./components/TasksList";
 import AddTask from "./components/AddTask";
 import { useState, useEffect } from "react";
+import { Routes, Route, Link, NavLink } from "react-router";
+import TaskDetail from "./components/taskDetail";
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const controller = new AbortController();
 
   async function fetchData() {
     setIsLoading(true);
     try {
+      const signal = controller.signal;
       const response = await fetch("http://localhost:3001/tasks");
 
       if (response.ok) {
@@ -29,6 +33,10 @@ export default function App() {
 
   useEffect(() => {
     fetchData();
+    return () => {
+      console.log("Cleanup");
+      controller.abort();
+    };
   }, []);
 
   // Add a task
@@ -71,9 +79,32 @@ export default function App() {
 
   return (
     <div className="App-container">
-      <Header myAppName={appName} />
-      <AddTask onAdd={addTask} />
-      <TasksList tasks={tasksFromServer} onDelete={deleteTask} />
+      <nav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/tasks">Tasks</NavLink>
+      </nav>
+      {/* <Header myAppName={appName} /> */}
+
+      {/* <TasksList tasks={tasksFromServer} onDelete={deleteTask} /> */}
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <h1>Welcome to {appName}</h1>
+              <AddTask onAdd={addTask} />
+            </>
+          }
+        />
+        <Route
+          path="tasks"
+          element={<TasksList tasks={tasksFromServer} onDelete={deleteTask} />}
+        >
+          <Route path=":id" element={<TaskDetail />} />
+        </Route>
+        <Route path="*" element={<h1>404 - Not Found</h1>} />
+      </Routes>
     </div>
   );
 }

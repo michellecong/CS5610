@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router";
 export default function AddTask({ onAdd = () => {} }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,6 +20,7 @@ export default function AddTask({ onAdd = () => {} }) {
       // Clear form after submission
       setTitle("");
       setDate("");
+      navigate("/tasks");
     } else {
       console.error("onAdd prop is not a function");
       alert("Something went wrong. Cannot add task.");

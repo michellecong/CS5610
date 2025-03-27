@@ -1,5 +1,6 @@
 import React from "react";
 import Task from "./Task";
+import { Outlet } from "react-router";
 
 export default function TasksList({ tasks, onDelete }) {
   return (
@@ -13,6 +14,7 @@ export default function TasksList({ tasks, onDelete }) {
           <li className="no-tasks">No tasks to show</li>
         )}
       </ul>
+      <Outlet />
     </>
   );
 }
