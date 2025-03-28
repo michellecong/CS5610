@@ -15,31 +15,42 @@ module.exports = {
         .collection("tasks")
         .insertOne(doc);
 
-      console.log(`Added to DB: ${result.insertedId}`);
+      return result;
     } catch (e) {
       console.error(`Failed to add to DB: ${e}`);
     }
   },
-  find: async function () {
+  readAll: async function () {
     try {
       const cursor = await client.db("cs5610").collection("tasks").find();
-      return cursor;
-    } catch (e) {
-      console.error(`Failed to read from DB: ${e}`);
-      throw e;
+      const data = await cursor.toArray();
+      //    console.log(data);
+      return data;
+    } catch (err) {
+      console.log("read all from db ", err);
     }
   },
-
-  findOne: async function (query) {
+  readOne: async function (filter) {
     try {
-      const document = await client
+      const result = await client
         .db("cs5610")
         .collection("tasks")
-        .findOne(query);
-      return document;
-    } catch (e) {
-      console.error(`Failed to read from DB: ${e}`);
-      throw e;
+        .findOne(filter);
+
+      return result;
+    } catch (err) {
+      console.log("read one from db ", err);
+    }
+  },
+  deleteOne: async function (filter) {
+    try {
+      const result = await client
+        .db("cs5610")
+        .collection("tasks")
+        .deleteOne(filter);
+      return result;
+    } catch (err) {
+      console.log("delete from db ", err);
     }
   },
 };
