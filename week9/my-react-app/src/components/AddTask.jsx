@@ -15,12 +15,16 @@ export default function AddTask({ onAdd = () => {} }) {
     // Check if onAdd is a function before calling it
     if (typeof onAdd === "function") {
       // Let the parent component handle the API call
-      onAdd({ title, date });
+      const newTaskId = await onAdd({ title, date });
 
       // Clear form after submission
       setTitle("");
       setDate("");
-      navigate("/tasks");
+      if (newTaskId) {
+        navigate(`/tasks/${newTaskId}`);
+      } else {
+        navigate("/tasks");
+      }
     } else {
       console.error("onAdd prop is not a function");
       alert("Something went wrong. Cannot add task.");

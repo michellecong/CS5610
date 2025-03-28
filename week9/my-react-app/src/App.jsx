@@ -49,18 +49,22 @@ export default function App() {
       // Add task to UI immediately for better UX
       const newTask = { ...task, id: nextId };
       setTasksFromServer([...tasksFromServer, newTask]);
-
+      let savedTask = {};
       // Then sync with server
-      await fetch("http://localhost:3001/tasks", {
+      const response = await fetch("http://localhost:3001/tasks", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(task),
       });
+      if (response.ok) {
+        const savedTask = await response.json();
+      }
 
       // Refresh data from server to get the server-assigned ID
       fetchData();
+      return savedTask.id || nextId;
     } catch (error) {
       console.error("Error adding task:", error);
     }
