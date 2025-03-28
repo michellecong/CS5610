@@ -1,27 +1,34 @@
 import React, { useState } from "react";
-
-export default function AddTask({ onAdd = () => {} }) {
+import { useNavigate } from "react-router";
+export default function AddTask({}) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!title) {
-      alert("Please add a task title");
-      return;
-    }
-
-    // Check if onAdd is a function before calling it
-    if (typeof onAdd === "function") {
-      // Let the parent component handle the API call
-      onAdd({ title, date });
-
-      // Clear form after submission
-      setTitle("");
-      setDate("");
-    } else {
-      console.error("onAdd prop is not a function");
-      alert("Something went wrong. Cannot add task.");
+    const newTask = { title: title, date: date };
+    console.log("new task is ", newTask);
+    setDate("");
+    setTitle("");
+    try {
+      //send a post request to the server
+      const response = await fetch("http://localhost:5001/api/tasks/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newTask),
+      });
+      if (!response.ok) {
+        return;
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.acknowledged) {
+        navigate(`tasks/${data.insertedId}`);
+      }
+      //
+    } catch (err) {
+      console.log("submitHandler", err);
     }
   }
 
