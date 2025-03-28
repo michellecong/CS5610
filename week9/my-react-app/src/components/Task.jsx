@@ -1,6 +1,5 @@
 import React from "react";
 import { IoTrashSharp } from "react-icons/io5";
-import { NavLink as Navlink } from "react-router";
 import { NavLink } from "react-router";
 
 export default function Task({ taskObj, onDelete }) {

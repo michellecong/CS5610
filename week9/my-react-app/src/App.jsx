@@ -4,7 +4,7 @@ import TasksList from "./components/TasksList";
 import AddTask from "./components/AddTask";
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, NavLink } from "react-router";
-import TaskDetail from "./components/taskDetail";
+import TaskDetail from "./components/TaskDetail";
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
@@ -15,7 +15,7 @@ export default function App() {
     setIsLoading(true);
     try {
       const signal = controller.signal;
-      const response = await fetch("http://localhost:3001/tasks");
+      const response = await fetch("http://localhost:3001/tasks", { signal });
 
       if (response.ok) {
         const data = await response.json();
@@ -42,8 +42,12 @@ export default function App() {
   // Add a task
   const addTask = async (task) => {
     try {
+      const nextId =
+        tasksFromServer.length > 0
+          ? Math.max(...tasksFromServer.map((t) => t.id)) + 1
+          : 1;
       // Add task to UI immediately for better UX
-      const newTask = { ...task, id: Date.now() };
+      const newTask = { ...task, id: nextId };
       setTasksFromServer([...tasksFromServer, newTask]);
 
       // Then sync with server
@@ -83,16 +87,13 @@ export default function App() {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/tasks">Tasks</NavLink>
       </nav>
-      {/* <Header myAppName={appName} /> */}
-
-      {/* <TasksList tasks={tasksFromServer} onDelete={deleteTask} /> */}
 
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <h1>Welcome to {appName}</h1>
+              <Header myAppName={appName} />
               <AddTask onAdd={addTask} />
             </>
           }
