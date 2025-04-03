@@ -2,12 +2,14 @@ import React from "react";
 import Header from "./components/Header";
 import TasksList from "./components/TasksList";
 import AddTask from "./components/AddTask";
-import { useState, useEffect } from "react";
-import { Routes, Route, NavLink, BrowserRouter } from "react-router-dom"; // Fixed import
+import { useState } from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
 import TaskDetail from "./components/TaskDetail";
 import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton"; // Added LogoutButton
-import { useAuth0 } from "@auth0/auth0-react"; // Added useAuth0 hook
+import LogoutButton from "./components/LogoutButton";
+import Profile from "./components/Profile"; // Import the Profile component
+import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "./components/ProtectedRoute"; // Import the ProtectedRoute component
 
 export default function App() {
   const [showForm, setShowForm] = useState(false);
@@ -16,12 +18,27 @@ export default function App() {
   };
   const appName = "My Awesome App";
 
-  // Added Auth0 status check
+  // Use useAuth0 hook to get authentication and loading state
   const { isAuthenticated, isLoading } = useAuth0();
 
-  // If loading, show loading message
+  // If loading, display the Auth0 loading image
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        className="loading-container"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <img
+          src="https://cdn.auth0.com/blog/auth0-react-sample/assets/loading.svg"
+          alt="Loading..."
+        />
+      </div>
+    );
   }
 
   return (
@@ -29,6 +46,10 @@ export default function App() {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/tasks">Tasks</NavLink>
+        {/* Add profile link */}
+        <NavLink to="/profile">Profile</NavLink>
+
+        {/* Conditionally render login and logout buttons */}
         {isAuthenticated ? <LogoutButton /> : <LoginButton />}
       </nav>
 
@@ -49,7 +70,13 @@ export default function App() {
         <Route path="tasks" element={<TasksList />}>
           <Route path=":taskId" element={<TaskDetail />} />
         </Route>
-        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+        {/* Add profile route */}
+        {/* <Route path="profile" element={<Profile />} /> */}
+        <Route
+          path="/profile"
+          element={<ProtectedRoute component={Profile} />}
+        />
+        <Route path="*" element={<h1>404 - Not Found</h1>} />
       </Routes>
     </div>
   );
