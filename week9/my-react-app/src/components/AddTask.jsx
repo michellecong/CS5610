@@ -14,9 +14,10 @@ export default function AddTask({}) {
     console.log("new task is ", newTask);
     setDate("");
     setTitle("");
+
     try {
+      let token = "";
       if (isAuthenticated) {
-        let token = "";
         token = await getAccessTokenSilently();
         console.log("token is ", token);
       }
