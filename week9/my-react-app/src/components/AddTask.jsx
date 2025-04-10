@@ -19,6 +19,9 @@ export default function AddTask({}) {
         body: JSON.stringify(newTask),
       });
       if (!response.ok) {
+        if (response.status === 401) {
+          alert("Unauthorized to add a task");
+        }
         return;
       }
       const data = await response.json();

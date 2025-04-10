@@ -20,7 +20,7 @@ export default function Auth0ProviderWithHistory({ children }) {
       "Auth0 environment variables missing. Please check if VITE_AUTH0_DOMAIN and VITE_AUTH0_CLIENT_ID are set in the .env file."
     );
     return (
-      <div style={{ color: "red", padding: "20px" }}>
+      <div>
         <h2>Auth0 Configuration Error</h2>
         <p>Please check the environment variables configuration.</p>
       </div>
@@ -33,6 +33,8 @@ export default function Auth0ProviderWithHistory({ children }) {
       clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
       authorizationParams={{
         redirect_uri: window.location.origin,
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        scope: "post:tasks delete:tasks",
       }}
       onRedirectCallback={onRedirectCallback}
     >
