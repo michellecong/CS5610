@@ -1,4 +1,4 @@
-/* :root {
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -12,11 +12,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+nav a {
+  margin-right: 1em;
+}
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+}
+a.active {
+  font-weight: bold;
 }
 a:hover {
   color: #535bf2;
@@ -24,11 +29,11 @@ a:hover {
 
 body {
   margin: 0;
-  /* display: flex;
-  place-items: center; */
-/* min-width: 320px;
+  /* display: flex; */
+  /* place-items: center; */
+  min-width: 320px;
   min-height: 100vh;
-  padding: 1.5em;
+  padding: 2rem;
 }
 
 h1 {
@@ -55,6 +60,70 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.appContainer {
+  border: darkblue 1px solid;
+  padding: 1em;
+  margin: 1em;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.taskContainer {
+  background-color: lightblue;
+  margin: 1em;
+  padding: 1em;
+}
+
+.taskTitleIconContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-control {
+  margin: 20px 0;
+  display: flex;
+}
+
+.form-control label {
+  margin-right: 10px;
+}
+.navBar {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 100;
+  color: #646cff;
+  display: block;
+}
+@media (min-width: 576px) {
+  /* this will be applied to screens bigger than 576 */
+  .navBar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav {
+    flex-direction: row;
+  }
+  .menuIcon {
+    display: none;
+  }
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -66,61 +135,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} */
-.App-container {
-  border: darkblue 1px solid;
-  padding: 1em;
-  margin-bottom: 2em;
-}
-
-.head-container {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-.tasks-list {
-  list-style-type: disc;
-}
-
-.task-container {
-  background-color: rgb(118, 152, 163);
-
-  justify-content: space-between;
-  padding: 0.5em;
-  margin: 0.5em;
-}
-
-.taskTitleIconContainer {
-  display: flex;
-  justify-content: space-between;
-}
-
-a {
-  color: rgb(116, 82, 239);
-  font-weight: 500;
-  text-decoration: inherit;
-}
-
-nav a {
-  color: rgb(10, 164, 103);
-  font-weight: 500;
-  text-decoration: inherit;
-  padding-left: 1em;
-}
-
-a.active {
-  color: rgb(223, 17, 203);
-  font-weight: 700;
 }

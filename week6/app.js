@@ -13,6 +13,7 @@ app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/tasks", taskRouter);
 app.get("/", (req, res) => {
   //res is responsible to send data/files

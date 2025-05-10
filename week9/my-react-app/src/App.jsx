@@ -1,58 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TasksList from "./components/TasksList";
 import AddTask from "./components/AddTask";
-import { useState } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Link, NavLink, Route, Routes } from "react-router";
 import TaskDetail from "./components/TaskDetail";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
-import Profile from "./components/Profile"; // Import the Profile component
 import { useAuth0 } from "@auth0/auth0-react";
-import ProtectedRoute from "./components/ProtectedRoute"; // Import the ProtectedRoute component
+import Profile from "./components/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function App() {
+  const { isAuthenticated, isLoading } = useAuth0();
   const [showForm, setShowForm] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const toggleShowForm = () => {
     setShowForm(!showForm);
   };
+  useEffect(() => {
+    // this function will be called when the component mounts
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // add event listener to the window object
+    window.addEventListener("resize", handleResize);
+
+    // cleanup function
+    // this function will be called when the component unmounts
+    // or when the effect is re-run
+    // (e.g. when the window is resized)
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const appName = "My Awesome App";
-
-  // Use useAuth0 hook to get authentication and loading state
-  const { isAuthenticated, isLoading } = useAuth0();
-
-  // If loading, display the Auth0 loading image
-  if (isLoading) {
-    return (
+  return isLoading ? (
+    <img src="https://cdn.auth0.com/blog/auth0-react-sample/assets/loading.svg" />
+  ) : (
+    <div className="appContainer">
       <div
-        className="loading-container"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+        className="menuIcon"
+        onClick={() => {
+          setMenuOpen(!menuOpen);
         }}
       >
-        <img
-          src="https://cdn.auth0.com/blog/auth0-react-sample/assets/loading.svg"
-          alt="Loading..."
-        />
+        {menuOpen ? <FaTimes /> : <FaBars />}
       </div>
-    );
-  }
-
-  return (
-    <div className="App-container">
-      <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/tasks">Tasks</NavLink>
-        {/* Add profile link */}
-        <NavLink to="/profile">Profile</NavLink>
-
-        {/* Conditionally render login and logout buttons */}
-        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-      </nav>
-
+      {(menuOpen || windowWidth > 576) && (
+        <div className="navBar">
+          <nav>
+            <NavLink
+              // className={({ isActive }) => {
+              //   if (isActive) {
+              //     return "activeLink";
+              //   }
+              // }}
+              to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink to="/tasks">Tasks</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
+          </nav>
+          <div>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
+        </div>
+      )}
       <Routes>
         <Route
           path="/"
@@ -63,20 +78,18 @@ export default function App() {
                 showForm={showForm}
                 onAddTask={toggleShowForm}
               />
-              {showForm && <AddTask />}
+              <AddTask />
             </>
           }
         />
         <Route path="tasks" element={<TasksList />}>
           <Route path=":taskId" element={<TaskDetail />} />
         </Route>
-        {/* Add profile route */}
-        {/* <Route path="profile" element={<Profile />} /> */}
         <Route
-          path="/profile"
+          path="profile"
           element={<ProtectedRoute component={Profile} />}
         />
-        <Route path="*" element={<h1>404 - Not Found</h1>} />
+        <Route path="*" element={<h1>That page doesn't exist</h1>} />
       </Routes>
     </div>
   );

@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Task from "./Task";
-import { Outlet } from "react-router";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 export default function TasksList() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
@@ -64,6 +62,7 @@ export default function TasksList() {
       console.log("deleteTask ", err);
     }
   }
+
   return (
     <>
       {isLoading ? (
@@ -71,7 +70,9 @@ export default function TasksList() {
       ) : tasksFromServer.length === 0 ? (
         <p>No tasks left</p>
       ) : (
-        <ul className="tasks-list">
+        <ul>
+          {/* render the tasks array titles using array.map
+        for each element return an <li> */}
           {tasksFromServer.map((task) => {
             return <Task key={task._id} taskObj={task} onDelete={deleteTask} />;
           })}
